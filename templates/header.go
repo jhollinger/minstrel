@@ -29,6 +29,43 @@ const Header string = `
         }
       };
     </script>
+    <style type="text/css">
+      .pane {
+        float: left;
+        width: 50%;
+      }
+
+      #player {
+        width: 100%;
+      }
+
+      .list {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .list > li {
+        list-style-type: none;
+      }
+
+      .list > li > a {
+        color: #444;
+        text-decoration: none;
+      }
+
+      #playlist {
+        background: #eee;
+      }
+
+      #playlist > li > a {
+        padding: 5px;
+        display: block;
+      }
+
+      #playlist > li > a:hover {
+        background-color: #ddd;
+      }
+    </style>
   </head>
   <body>
 `
