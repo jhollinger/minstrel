@@ -30,40 +30,72 @@ const Header string = `
       };
     </script>
     <style type="text/css">
-      .pane {
-        float: left;
-        width: 50%;
+      html, body {
+        margin: 0px;
+        height: 100%;
       }
 
       #player {
+        position: relative;
+        height: 35%;
+        background-color: #555;
+      }
+
+      #controls {
+        position: absolute;
+        bottom: 0px;
         width: 100%;
       }
 
-      .list {
-        margin: 0px;
-        padding: 0px;
+      #library {
+        position: relative;
+        height: 65%;
+        background-color: #eee;
       }
 
-      .list > li {
+      #breadcrumbs {
+        position: fixed;
+        width: 100%;
+        margin: 0px;
+        padding: 3px;
+        background-color: #999;
+        font-size: 0.8em;
+      }
+
+      #breadcrumbs > li {
+        list-style-type: none;
+        display: inline-block;
+      }
+
+      #breadcrumbs > li > a {
+        color: #eee;
+        text-decoration: none;
+      }
+
+      #list {
+        position: absolute;
+        top: 20px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        margin: 0px;
+        padding: 0px;
+        overflow-y: auto;
+      }
+
+      #list > li {
         list-style-type: none;
       }
 
-      .list > li > a {
+      #list > li > a {
+        display: block;
+        padding: 3px;
         color: #444;
         text-decoration: none;
       }
 
-      #playlist {
-        background: #eee;
-      }
-
-      #playlist > li > a {
-        padding: 5px;
-        display: block;
-      }
-
-      #playlist > li > a:hover {
-        background-color: #ddd;
+      #list > li:nth-child(even) {
+        background-color: #e7e7e7;
       }
     </style>
   </head>
