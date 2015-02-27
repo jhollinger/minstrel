@@ -7,51 +7,30 @@ import (
 )
 
 type Directory struct {
-	Path   string
-	Dirs   []Node
-	Tracks []Node
+	Name   string `json:"name"`
+	Path   string `json:"path"`
+	Dirs   []Node `json:"dirs"`
+	Tracks []Node `json:"tracks"`
+}
+
+type Node struct {
+	Name string `json:"name"`
+	Path string `json:"path"`
 }
 
 func NewDirectory(path string) *Directory {
 	children, _ := filepath.Glob(filepath.Join(root, path, "*"))
 	dirs, files := []Node{}, []Node{}
 	for i := 0; i < len(children); i++ {
-		child := strings.Replace(children[i], root, "", 1)
+		childName := strings.Replace(filepath.Base(children[i]), filepath.Ext(children[i]), "", 1)
 		fi, _ := os.Stat(children[i])
 		if fi.IsDir() {
-			dirs = append(dirs, Node{child})
+			childPath := strings.Replace(children[i], root, "", 1)
+			dirs = append(dirs, Node{childName, childPath})
 		} else {
-			files = append(files, Node{child})
+			childPath := strings.Replace(children[i], root, "/file", 1)
+			files = append(files, Node{childName, childPath})
 		}
 	}
-	return &Directory{path, dirs, files}
-}
-
-func (this Directory) Name() string {
-	return filepath.Base(this.Path)
-}
-
-func (this Directory) FirstTrack() *Node {
-	return &this.Tracks[0]
-}
-
-func (this Directory) StreamPaths() []string {
-	paths := []string{}
-	for _, track := range this.Tracks {
-		paths = append(paths, track.StreamPath())
-	}
-	return paths
-}
-
-type Node struct {
-	Path string
-}
-
-func (this Node) StreamPath() string {
-	return "/stream" + this.Path
-}
-
-func (this Node) Name() string {
-	name := filepath.Base(this.Path)
-	return strings.Replace(name, filepath.Ext(name), "", 1)
+	return &Directory{filepath.Base(path), path, dirs, files}
 }
