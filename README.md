@@ -8,7 +8,7 @@ I use my Chromebook around the house and lot. Unfortunately there's no DLNA clie
 
     minstrel --music ~/Music --port 8080
 
-Then open your browser to http://<host>:8080. Check the wiki for init script examples.
+Then open your browser to http://hostname:8080. Check the wiki for init script examples.
 
 ## Download
 
